@@ -2,21 +2,21 @@
 !function () {
 
 	function msgBox(content,opt){
-
-		var styleSheet=document.styleSheets,msg={sele:".layer-msg",rule:"position:absolute;word-break: break-all;word-wrap: break-word;padding:4%;z-index:999999;max-width:60%;min-width:50%;background:#000;opacity:0.5;filter:alpha(opacity=50);color:#fff"};
+		var styleSheet=document.styleSheets,msg={sele:".layer-msg",rule:"position:absolute;word-break: break-all;word-wrap: break-word;z-index:999999;"};
+		var useCss=opt.clearDefaultCss||false;
 		if(!checkRule(styleSheet[styleSheet.length-1],msg.sele)){
 			inserCss(styleSheet[styleSheet.length-1],msg,++layer.rulesIndex);
 		}
-		this.d=createEle("div","layer layer-msg",content,document.body);
+		this.d=createEle("div","layer layer-msg",content,document.body,useCss?null:"color:#fff;max-width:60%;min-width:50%;padding:4%;background:#000;opacity:0.5;filter:alpha(opacity=50);border-radius:4px");
 	}
 	function alertBox(opt){
-		var useCss=opt.clearDefaultCss;
-		var styleSheet=document.styleSheets,alert={sele:".layer-alert",rule:"position:absolute;word-break: break-all;word-wrap: break-word;padding:4%;z-index:999999;"};
+		var useCss=opt.clearDefaultCss||false;
+		var styleSheet=document.styleSheets,alert={sele:".layer-alert",rule:"position:absolute;word-break: break-all;word-wrap: break-word;z-index:999999;"};
 		
 		if(!checkRule(styleSheet[styleSheet.length-1],alert.sele)){
 			inserCss(styleSheet[styleSheet.length-1],alert,++layer.rulesIndex);	
 		}
-		this.d=createEle("div","layer layer-alert",null,document.body,useCss?null:"background:#fff;min-width:50%;max-width:60%;border-radius:4px");
+		this.d=createEle("div","layer layer-alert",null,document.body,useCss?null:"background:#fff;min-width:50%;max-width:60%;padding:4%;border-radius:4px");
 		this.titleEle=createEle("div","layer-title",opt.titleText,this.d,useCss?null:"color:#328AFD;");
 		this.closeEle=createEle("div","layer-close",opt.closeBtnText,this.titleEle,useCss?null:"color:red;float:right");
 		this.contentEle=createEle("div","layer-content",opt.contentText,this.d,useCss?null:"color:#333");
@@ -90,7 +90,7 @@
 		if(this.show){
 			this._del(this.d);
 		}
-		this.d=new msgBox(s).d;
+		this.d=new msgBox(s,opt||{}).d;
 		addEvent(this.d,"ontouchstart" in window ?"touchstart":"click",function(e){
 		var e=e||window.event;
 		if(e.preventDefault){e.preventDefault();}else{e.returnValue=false;}
@@ -121,7 +121,7 @@
 		}
 		this._initWrap();
 		this.wrapShow=true;
-		this.d=new alertBox(opt).d;
+		this.d=new alertBox(opt||{}).d;
 		this._popUp();
 	};
 	function initCss(t) {
