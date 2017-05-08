@@ -3,7 +3,7 @@
 
     <script type="text/javascript" src="carousel.js"></script>
 
-1.使用:
+1.使用: 提示信息 是innerHtml
 msg提示层
 
     layer.msg('msgmsgmsgmsgmsgmsgmsgms');
@@ -23,7 +23,9 @@ alert 弹出确定层
     });
 
 
-### 样式自定义  
+### 样式自定义   
+
+1.js清除默认样式 2.然后修改以下css表
 
 
     clearDefaultCss:true;
