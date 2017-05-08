@@ -1,4 +1,7 @@
 # layer   
+IE8,主流浏览器,移动端的弹出框插件 (响应式)
+
+
 引入js文件
 
     <script type="text/javascript" src="carousel.js"></script>
