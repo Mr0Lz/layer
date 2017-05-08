@@ -21,3 +21,24 @@ alert 弹出确定层
     alert(1);
     }
     });
+
+
+###样式自定义  
+
+
+    clearDefaultCss:true;
+
+msg提示层 
+
+    .layer-msg
+
+
+alert弹出确定层
+
+
+    .layer-alert
+    .layer-title
+    .layer-close
+    .layer-content
+    .layer-yesBtn
+    .layer-noBtn
