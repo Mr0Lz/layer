@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>test</title>
+	<meta name="viewport"  content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+	<link rel="stylesheet" type="text/css" href="test.css">
+	<script type="text/javascript" src="js/mobile_layer.js"></script>
+</head>
+<body>
+	
+
+	<a class="yes-btn act" onclick="layerMsg(event)">msg</a>
+	<a class="yes-btn act" onclick="layerAlert(event)">alert</a>
+</body>
+<script type="text/javascript">
+
+function layerMsg(){
+	layer.msg('msgmsgmsgmsgmsgmsgmsgmsgmsgmsgmsgmsgmsgmsgmsgmsgmsgmsgmsgmsgmsgmsgmsgmsgmsgmsgmsgmsgmsgmsgmsgmsgmsgmsgmsgmsgmsgmsgmsgmsgmsgmsgmsgmsgmsgmsgmsgmsgmsgmsgmsgmsg');
+}
+
+
+function layerAlert(){
+	layer.alert({titleText:"yes or no title",
+		yesBtnText:"yes",
+		noBtnText:"no",
+		closeBtnText:"close",
+		contentText:"contentTextcontentTextcontentTextcontentTextcontentTextcontentTextcontentTextcontentTextcontentTextcontentTextcontentTextcontentTextcontentTextcontentTextcontentTextcontentTextcontentTextcontentTextcontentTextcontentTextcontentTextcontentTextcontentTextcontentTextcontentTextcontentTextcontentTextcontentTextcontentTextcontentTextcontentTextcontentTextcontentTextcontentTextcontentTextcontentTextcontentTex",
+		clearDefaultCss:false,//不使用默认样式
+		yesCall:function () {//点击确认按钮
+			alert(1);
+		}
+	});
+}
+
+</script>
+</html>

@@ -1,0 +1,21 @@
+*{padding: 0;margin: 0;text-decoration: none;}
+
+.yes-btn{
+	display: block;
+	font-size: 18px;
+	color: #328AFD;
+	background: #fff;
+	border-radius: 57px;
+	height: 40px;
+	line-height: 40px;
+	width: 80%;
+	margin: 20px auto;
+	text-align: center;
+	clear: both;
+	border: 2px solid #328AFD;
+	border-radius: 57px;
+}
+.act{
+	background: #328AFD;
+	color: #fff;
+}
