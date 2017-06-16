@@ -7,21 +7,21 @@
 		if(!checkRule(styleSheet[styleSheet.length-1],msg.sele)){
 			inserCss(styleSheet[styleSheet.length-1],msg,++layer.rulesIndex);
 		}
-		this.d=createEle("div","layer layer-msg",content,document.body,useCss?null:"color:#fff;max-width:60%;min-width:50%;padding:4%;background:#000;opacity:0.5;filter:alpha(opacity=50);border-radius:4px");
+		this.d=createEle("div","layer layer-msg",content,document.body,useCss?null:"color:#fff;max-width:60%;min-width:50%;max-height:600px;overflow:auto;padding:4%;background:#000;opacity:0.5;filter:alpha(opacity=50);border-radius:4px");
 	}
 	function alertBox(opt){
 		var useCss=opt.clearDefaultCss||false;
-		var styleSheet=document.styleSheets,alert={sele:".layer-alert",rule:"position:absolute;word-break: break-all;word-wrap: break-word;z-index:999999;"};
+		var styleSheet=document.styleSheets,alert={sele:".layer-alert",rule:"position:absolute;word-break: break-all;word-wrap:break-word;z-index:999999;"};
 		
 		if(!checkRule(styleSheet[styleSheet.length-1],alert.sele)){
 			inserCss(styleSheet[styleSheet.length-1],alert,++layer.rulesIndex);	
 		}
-		this.d=createEle("div","layer layer-alert",null,document.body,useCss?null:"background:#fff;min-width:50%;max-width:60%;padding:4%;border-radius:4px");
+		this.d=createEle("div","layer layer-alert",null,document.body,useCss?null:"background:#fff;min-width:500px;max-height:500px;overflow:auto;padding:4px 2%;border-radius:4px");
 		this.titleEle=createEle("div","layer-title",opt.titleText,this.d,useCss?null:"color:#328AFD;");
-		this.closeEle=createEle("div","layer-close",opt.closeBtnText,this.titleEle,useCss?null:"color:red;float:right");
+		this.closeEle=createEle("div","layer-close fa fa-remove fa-2x",opt.closeBtnText,this.titleEle,useCss?null:"color:red;float:right;cursor: pointer;");
 		this.contentEle=createEle("div","layer-content",opt.contentText,this.d,useCss?null:"color:#333");
-		this.yesBtnEle=createEle("div","layer-yesBtn",opt.yesBtnText,this.d,useCss?null:"display: inline-block;width:50%;text-align:center");
-		this.noBtnEle=createEle("div","layer-noBtn",opt.noBtnText,this.d,useCss?null:"display: inline-block;width:50%;text-align:center");
+		this.yesBtnEle=createEle("div","layer-yesBtn fa fa-save",opt.yesBtnText,this.d,useCss?null:"display: inline-block;width:20%;text-align:center;cursor: pointer;");
+		this.noBtnEle=createEle("div","layer-noBtn fa fa-times-rectangle",opt.noBtnText,this.d,useCss?null:"display: inline-block;width:20%;text-align:center;cursor: pointer;float: right;");
 		addEvent(this.closeEle,"ontouchstart" in window?"touchstart":"click",closeBox);
 		addEvent(this.noBtnEle,"ontouchstart" in window?"touchstart":"click",closeBox);
 		addEvent(this.yesBtnEle,"ontouchstart" in window?"touchstart":"click",function (e) {
@@ -31,8 +31,8 @@
 		function closeBox(e) {
 			var e=e||window.event;
 			if(e.preventDefault){e.preventDefault();}else{e.returnValue=false;}
-			layer._del(layer.d);
-			layer._del(layer.wrap);
+			layer._del(layer.d,"show");
+			layer._del(layer.wrap,"wrapShow");
 		}
 	}
 
@@ -48,9 +48,8 @@
 		this._initDoc();
 		this.show=true;
 	};
-	Layer.prototype._del=function(d){
-		this.show=false;
-		this.wrapShow=false;
+	Layer.prototype._del=function(d,flag){
+		this[flag]=false;
 		if(d.remove){
 			d.remove();
 		}else if (d.removeNode) {
@@ -88,13 +87,13 @@
 	Layer.prototype.msg=function (s,opt) {
 		var self=this;
 		if(this.show){
-			this._del(this.d);
+			this._del(this.d,"show");
 		}
 		this.d=new msgBox(s,opt||{}).d;
 		addEvent(this.d,"ontouchstart" in window ?"touchstart":"click",function(e){
 		var e=e||window.event;
 		if(e.preventDefault){e.preventDefault();}else{e.returnValue=false;}
-			self._del(self.d);
+			self._del(self.d,'show');
 		});
 		this._popUp();
 		delayClose(this);
@@ -117,7 +116,8 @@
 		var self=this;
 		clearTimeout(this.timer);
 		if(this.show){
-			this._del(this.d);
+			this._del(this.d,"show");
+			this._del(this.wrap,"wrapShow");
 		}
 		this._initWrap();
 		this.wrapShow=true;
@@ -153,7 +153,7 @@
 	function delayClose(t){
 		clearTimeout(t.timer);
 		t.timer=setTimeout(function () {
-				t._del(t.d);
+				t._del(t.d,"show");
 			},1000);
 		}
 		function addEvent(o,event,fn){
